@@ -1,14 +1,12 @@
 var express = require('express');
 var mysql = require('../connection').con;
-
+var constring=require('../connection').constring;
 var sqlsvr = require('msnodesqlv8');
 // var sqlsvr = require('../connection').constring;
-const constring = "server=.;Database=Exam;Trusted_connection=Yes;Driver={SQL Server Native Client 11.0}";
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  // res.send('respond with a resource');
   // res.redirect("users/login", {session:req.session});
   res.render("login", { session: req.session });
 });
@@ -58,9 +56,11 @@ router.post('/login', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
   req.session.destroy();
-  res.redirect();
+  res.redirect("/");
 });
 
-
+router.get('/newquote',(req,res)=>{
+  res.render("newquote");
+})
 
 module.exports = router;
