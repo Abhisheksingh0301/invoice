@@ -10,7 +10,8 @@
 //     if(err) throw err;
 //     console.log("Connection successful !!!");
 //   })
-const constring="server=.;Database=Exam;Trusted_connection=Yes;Driver={SQL Server Native Client 11.0}";
+const constring=("server=.;Database=Exam;Trusted_connection=Yes;Driver={SQL Server Native Client 11.0}");
+
 module.exports.constring=constring;
 
 //  module.exports.con=con;

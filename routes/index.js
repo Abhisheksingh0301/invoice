@@ -1,6 +1,7 @@
 var express = require('express');
+const session = require('express-session');
 var mysql = require('../connection').con;
-var constring=require('../connection').constring;
+var constring = require('../connection').constring;
 var sqlsvr = require('msnodesqlv8');
 // var sqlsvr = require('../connection').constring;
 var router = express.Router();
@@ -8,6 +9,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
   // res.redirect("users/login", {session:req.session});
+  res.locals.uid=req.session;
   res.render("login", { session: req.session });
 });
 
@@ -36,8 +38,6 @@ router.post('/login', function (req, res, next) {
 
           if (data[count].Password == user_password) {
             req.session.user_id = data[count].user_id;
-            console.log(req.session.user_id);
-            console.log(data[count].user_id);
             // console.log("success");
             //res.render("login", { session: req.session });
             return res.redirect("/");
@@ -59,8 +59,15 @@ router.get('/logout', function (req, res, next) {
   res.redirect("/");
 });
 
-router.get('/newquote',(req,res)=>{
-  res.render("newquote");
+router.get('/newquote', (req, res) => {
+  console.log("sessionid", req.session.user_id);
+  if (!req.session.user_id) {
+    console.log("not logged in");
+    res.redirect("/");
+  } else {
+    res.locals.uid=req.session;
+    res.render("newquote",{ session: req.session });
+  }
 })
 
 module.exports = router;
