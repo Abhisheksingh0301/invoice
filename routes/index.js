@@ -58,6 +58,11 @@ router.get('/logout', function (req, res, next) {
   req.session.destroy();
   res.redirect("/");
 });
+router.get('/view', function (req, res, next) {
+  res.locals.uid=req.session;
+  console.log("in view");
+  res.send(req.body.item[0]);
+});
 
 router.get('/newquote', (req, res) => {
   console.log("sessionid", req.session.user_id);

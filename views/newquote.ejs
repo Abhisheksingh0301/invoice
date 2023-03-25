@@ -17,7 +17,7 @@
         $(document).ready(function () {
             $("#newrows").click(function () {
                 var addcontrol = "<tr>"
-                addcontrol += "<td><input type='text' name='item' placeholder='Enter Item'></td>"
+                addcontrol += "<td><input type='text' name='item[]' placeholder='Enter Item'></td>"
                 addcontrol += "<td><input type='text' name='description' placeholder='Description' style='width:400px'></td>"
                 addcontrol += "<td><input type='number' name='rate' placeholder='Rate'></td>"
                 addcontrol += "</tr>";
@@ -36,23 +36,27 @@
     </section>
     <div class="container">
         <div class="col-md-6">
-            <table id="mytbl" class="table table-bordered" style="width:80%;">
-                <thead style="color: red;">
-                    <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Rate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"><input type="button" value="Add new row" id="newrows" style="width:500px"
-                                class="btn btn-success"></td>
-                    </tr>
-                </tfoot>
-            </table>
+            <form method="post" action="/view">
+                <table id="mytbl" class="table table-bordered" style="width:80%;">
+                    <thead style="color: red;">
+                        <tr>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><input type="button" value="Add new row" id="newrows" style="width:500px"
+                                    class="btn btn-success"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+           
         </div>
     </div>
     <%- include('footer'); -%>
