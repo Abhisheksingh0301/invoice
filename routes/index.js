@@ -74,7 +74,9 @@ router.post('/view', function (req, res, next) {
   console.log(desc[0]);
   console.log(rt[0]);
   console.log(req.body);
-  res.send(req.body);
+  console.log(itm.length);
+  res.send(itm.length);
+  //res.send(req.body.item.length);
 });
 
 router.get('/newquote', (req, res) => {
