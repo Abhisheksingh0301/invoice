@@ -9,7 +9,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
   // res.redirect("users/login", {session:req.session});
-  res.locals.uid=req.session;
+  res.locals.uid = req.session;
   res.render("login", { session: req.session });
 });
 
@@ -58,10 +58,23 @@ router.get('/logout', function (req, res, next) {
   req.session.destroy();
   res.redirect("/");
 });
-router.get('/view', function (req, res, next) {
-  res.locals.uid=req.session;
+router.post('/view', function (req, res, next) {
+  res.locals.uid = req.session;
   console.log("in view");
-  res.send(req.body.item[0]);
+  var itm = new Array();
+  var desc = new Array();
+  var rt = new Array();
+
+  itm = req.body.item;
+  desc = req.body.description;
+  rt = req.body.rate;
+  // console.log(req.body.item);
+  // console.log(req.body.description);
+  console.log(itm[0]);
+  console.log(desc[0]);
+  console.log(rt[0]);
+  console.log(req.body);
+  res.send(req.body);
 });
 
 router.get('/newquote', (req, res) => {
@@ -70,8 +83,8 @@ router.get('/newquote', (req, res) => {
     console.log("not logged in");
     res.redirect("/");
   } else {
-    res.locals.uid=req.session;
-    res.render("newquote",{ session: req.session });
+    res.locals.uid = req.session;
+    res.render("newquote", { session: req.session });
   }
 })
 
